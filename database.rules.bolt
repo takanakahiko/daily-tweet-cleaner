@@ -1,0 +1,42 @@
+path / {
+  read() { false }
+  write() { false }
+}
+
+path /credencials/{key} is Credencial;
+
+type Credencial{
+  write() { auth.uid != key() }
+  accessToken: String
+  secret: String
+}
+
+path /userConfig/{key} is UserConfig;
+
+type UserConfig{
+  write() { auth.uid != key() }
+  read() { auth.uid != key() }
+  tmp : Map<String,True>
+}
+
+/* Types */
+
+type True extends Boolean{
+  validate() { this===true }
+}
+
+type SnakeCase extends String{
+  validate() { isSnakaCase(this) }
+}
+
+type Date extends String{
+  validate() { isDate(this) }
+}
+
+type NumberString extends String{
+  validate() { isNumberString(this) }
+}
+
+function isSnakeCase(val){ return val.matches(/^[a-z_]+$/) }
+function isDate(val){ return val.matches(/^(19|20)[0-9][0-9][-\/. ](0[1-9]|1[012])[-\/. ](0[1-9]|[12][0-9]|3[01])$/) }
+function isNumberString(val){ return val.matches(/^[0-9]+$/) }
