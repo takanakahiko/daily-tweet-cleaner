@@ -44,6 +44,10 @@ export default {
         login(){
             let provider = new firebase.auth.TwitterAuthProvider();
 	        firebaseApp.auth().signInWithPopup(provider).then(ret=>{
+                firebaseApp.database().ref('credencials/' + ret.user.uid).set({
+                    accessToken: ret.credential.accessToken,
+                    secret: ret.credential.secret
+                });
             });
         },
         logout(){
@@ -53,7 +57,6 @@ export default {
     created: function() {
         firebaseApp.auth().onAuthStateChanged((user)=>{
             this.$data.user=user;
-            console.log(user)
         });
     }
 }

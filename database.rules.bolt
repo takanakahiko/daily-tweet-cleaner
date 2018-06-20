@@ -3,19 +3,19 @@ path / {
   write() { false }
 }
 
-path /credencials/{key} is Credencial;
+path /credencials is Credencial[];
 
 type Credencial{
-  write() { auth.uid != key() }
+  write() { auth != null && auth.uid == key() }
   accessToken: String
   secret: String
 }
 
-path /userConfig/{key} is UserConfig;
+path /userConfig is UserConfig[];
 
 type UserConfig{
-  write() { auth.uid != key() }
-  read() { auth.uid != key() }
+  write() { auth != null && auth.uid == key() }
+  read() { auth != null && auth.uid == key() }
   tmp : Map<String,True>
 }
 
