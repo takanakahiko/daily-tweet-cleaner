@@ -10,9 +10,12 @@
 
 <script>
 import Vue from 'vue'
-import Login from "./login.vue"
+import Element from 'element-ui'
 
 import { firebaseApp } from './firebaseApp.js';
+import Login from "./login.vue"
+
+Vue.use(Element)
 
 export default {
 

@@ -17,6 +17,7 @@
     "serve": "parcel src/index.html"
   },
   "dependencies": {
+    "element-ui": "^2.4.2",
     "firebase": "^5.0.4",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0",
