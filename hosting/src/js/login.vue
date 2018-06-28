@@ -20,8 +20,9 @@
 
 <template>
     <div style="display: inline-block" class="text-right">
-        <a v-on:click="login" class="square_btn">ログイン</a>
-        <a v-on:click="logout" class="square_btn">サインアウト</a>
+        <el-button v-on:click="login"  type="primary" round>ログイン</el-button>
+        <el-button v-on:click="logout" type="primary" round>サインアウト</el-button>
+        <el-button v-on:click="switchLoginState" type="primary" round>切り替え</el-button>
         <span>{{ isAuth ? "ログイン中" : "ログインしていません"}}</span>
     </div>
 </template>
@@ -38,9 +39,13 @@ export default {
         user:null
     }),
     computed:{
-        isAuth:function(){return this.user}
+        isAuth:function(){return this.user!==null}
     },
     methods:{
+        switchLoginState(){
+            if( this.isAuth ) this.logout();
+            else this.login();
+        },
         login(){
             let provider = new firebase.auth.TwitterAuthProvider();
 	        firebaseApp.auth().signInWithPopup(provider).then(ret=>{
