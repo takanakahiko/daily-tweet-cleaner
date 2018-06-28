@@ -9,6 +9,7 @@
     <el-row>
       <el-col :span="12" :offset="6" :xs="{span:24, offset:0}">
         <el-card class="box-card">
+          <div slot="header" class="clearfix">ようこそ</div>
           <login></login>
         </el-card>
       </el-col>

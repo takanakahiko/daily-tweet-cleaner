@@ -2,7 +2,6 @@
 
 </style>
 
-
 <template>
     <div style="display: inline-block">
         <el-button v-on:click="login"  type="primary" round>ログイン</el-button>
